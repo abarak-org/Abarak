@@ -4,8 +4,6 @@
 
 
 
-
-
                 _____                   _____                      _     __
       /\       |  _  \        /\       |  _  \           /\       | |   / /             We're hiring!
      /  \      | | )  |      /  \      | | )  |         /  \      | |  / /              c v  @  a b a r a k . c o m
@@ -15,8 +13,6 @@
  / /      \ \  | (_/  /  / /      \ \  | |    \ \   / /      \ \  | |   \ \
 /_/        \_\ |_____/  /_/        \_\ |_|     |_| /_/        \_\ |_|    \_\            If you found a vulnerability:
                                                                                         https://abarak.com/security.txt
- 
-
 
 
 __________________________________________________________________________________
@@ -40,8 +36,6 @@ make a difference!
 
 
 __________________________________________________________________________________
-
-
 
 
 
@@ -97,6 +91,9 @@ example :
   <div id="pages" class="pages">
       <a id="about" href="/about">About</a>
   </div>
+  
+  <div id="version" style="position: fixed; bottom: 5px; left: 5px; font-size: 0.8em; color: gray;"></div>
+
   <script type="text/javascript" src="abarak.js"></script>
   <script>
       const u1 = document.getElementById('u1');
@@ -140,6 +137,16 @@ example :
       checkLangCookie();
       switchPlaceholder();
       setInterval(switchPlaceholder, 10000);
+
+      fetch('version.txt')
+          .then(response => response.text())
+          .then(text => {
+              document.getElementById('version').textContent = text.trim();
+          })
+          .catch(error => {
+              console.error("Erreur lors du chargement de la version:", error);
+              document.getElementById('version').textContent = "vUnknown";
+          });
   </script>
 </body>
 </html>

@@ -11,7 +11,7 @@ $dotenv = Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
 $mail = new PHPMailer();
-$mail->SMTPDebug = SMTP::DEBUG_SERVER;
+$mail->SMTPDebug = 0;
 
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["lastname"], $_POST["firstname"], $_POST["mail"], $_POST["message"])) {
     $lname = transform($_POST["lastname"]);
@@ -51,7 +51,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["lastname"], $_POST["f
             echo 0;
         }
     } catch (Exception $e) {
-        // En production, on logge l'erreur sans exposer de détails sensibles à l'utilisateur
         error_log('Mailer Error: ' . $e->getMessage());
         echo "Erreur lors de l'envoi de l'email.";
     }

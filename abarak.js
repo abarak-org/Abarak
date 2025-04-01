@@ -13,8 +13,8 @@ async function switchLanguage(lang) {
             .then((data) => {
                 for (const translation of data[page]) {
                     const element = document.getElementById(translation.element);
-                    if (translation.element == "placeholder") { 
-                        switchPlaceholder(translation.text); 
+                    if (translation.element == "placeholder") {
+                        switchPlaceholder(translation.text);
                     } else if (Array.isArray(translation.text)) {
                         let indexElements = 0;
                         for (let index = 0; index < translation.text.length; index++) {
@@ -37,8 +37,8 @@ async function switchLanguage(lang) {
                             else if (subelement.tagName == "INPUT" && subelement.getAttribute('type') == 'submit') {
                                 subelement.value = subtext;
                             }
-                            else { 
-                                subelement.textContent = subtext; 
+                            else {
+                                subelement.textContent = subtext;
                             }
                             indexElements++;
                         }
@@ -53,7 +53,7 @@ async function switchLanguage(lang) {
     } catch (error) {
         console.log(error.message);
     }
-    
+
     // Envoi de l'événement de changement de langue
     sendTrackingEvent("language_change", { language: lang });
 }
@@ -141,4 +141,14 @@ function sendTrackingEvent(eventName, eventData) {
     xhr.open("POST", "tracker.php", true);
     xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     xhr.send(JSON.stringify(data));
+}
+
+function switchPlaceholder(text) {
+    const input = document.getElementById('placeholder');
+    if (!input) return;
+    if (text) {
+        input.placeholder = text;
+    } else {
+        input.placeholder = "Search...";
+    }
 }
