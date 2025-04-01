@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+
+<!--
+
+
+
+
+
+                _____                   _____                      _     __
+      /\       |  _  \        /\       |  _  \           /\       | |   / /             We're hiring!
+     /  \      | | )  |      /  \      | | )  |         /  \      | |  / /              c v  @  a b a r a k . c o m
+    / /\ \     | (_/  /     / /\ \     | (_/  /        / /\ \     | | / / 
+   / /__\ \    |  _  <     / /__\ \    | |  \ \       / /__\ \    |  _  <               Don't click here:
+  / /____\ \   | | )  |   / /____\ \   | |   \ \     / /____\ \   | |  \ \              https://dontclickhere.abarak.com
+ / /      \ \  | (_/  /  / /      \ \  | |    \ \   / /      \ \  | |   \ \
+/_/        \_\ |_____/  /_/        \_\ |_|     |_| /_/        \_\ |_|    \_\            If you found a vulnerability:
+                                                                                        https://abarak.com/security.txt
+ 
+
+
+
+__________________________________________________________________________________
+
+
+
+Join Our Team as a Developer!
+
+We are looking for passionate and talented developers to join our team. If you have 
+the ability to produce clean, maintainable code without relying on page generators, 
+we want to hear from you!
+
+We value quality and efficiency in development. You will be responsible for creating 
+fast-loading pages that provide a smooth user experience across all devices. Whether 
+on mobile, tablet, or desktop, your expertise in optimization and compatibility will 
+be essential to us.
+
+If you enjoy tackling challenges and have a keen eye for detail, don’t hesitate to 
+apply and show us what you can do. Together, let’s create digital experiences that 
+make a difference!
+
+
+__________________________________________________________________________________
+
+
+
+
+
+example :
+
+
+
+
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="description" content="Hyper-Proximity Search Engine"/>
+  <meta name="keywords" content="Abarak, Proximity, Search, Items"/>
+  <meta name="author" content="Abarak"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ABARAK Find Anything, Anywhere, on Any Device</title>
+  <link href="abarak_com_styles.css" rel="stylesheet"/>
+</head>
+<body class="front-page">
+  <select id="language" class="language" name="language">
+      <option id="en" value="en">En</option>
+      <option id="fr" value="fr">Fr</option>
+      <option id="esp" value="esp">Es</option>
+      <option id="ro" value="ro">Ro</option>
+  </select>
+  <div class="container">
+      <div class="logo-container">
+          <div class="letter-u" id="u1">U</div>
+          <div class="letter-u" id="u2">U</div>
+          <div class="letter-u" id="u3">U</div>
+      </div>
+      <div class="text-container">
+          <h1 class="title" id="title">ABARAK</h1>
+          <p class="subtitle" id="subtitle">AI-Enhanced Hyper-Proximity Search Engine</p>
+      </div>
+  </div>
+  <p class="slogan" id="slogan">Find Anything, Anywhere, on Any Device.</p>
+
+  <div class="search-container">
+      <div class="search-input-container"> <!-- Barre de recherche -->
+          <img src="img/search.png" class="search-icon"/> <!-- Icône de recherche -->
+          <!-- Ajout de l'ID "search-form" pour pouvoir capter la soumission -->
+          <form id="search-form" action="https://www.google.com/search" method="get" style="display: flex; width: 100%;">
+              <input id="placeholder" type="text" name="q" class="search-box" placeholder="">
+              <img class="search-icon" src="img/micro.png" width="24px"/>
+              <img src="img/camera.png" width="24px"/>
+          </form>
+      </div>
+      <!-- <button type="submit" class="search-button">Rechercher</button> -->
+  </div>
+  <div id="pages" class="pages">
+      <a id="about" href="/about">About</a>
+  </div>
+  <script type="text/javascript" src="abarak.js"></script>
+  <script>
+      const u1 = document.getElementById('u1');
+      const u2 = document.getElementById('u2');
+      const u3 = document.getElementById('u3');
+      const title = document.getElementById('title');
+      const subtitle = document.getElementById('subtitle');
+      const slogan = document.getElementById('slogan');
+
+      setTimeout(() => {
+          u1.style.animation = 'rotate1 3s forwards';
+          u2.style.animation = 'rotate2 3s forwards';
+          u3.style.animation = 'rotate3 3s forwards';
+      }, 1000);
+
+      addDelayAnimation(title, 4000);
+      addDelayAnimation(subtitle, 4500);
+      addDelayAnimation(slogan, 5000);
+
+      /* Suivi de la soumission de la barre de recherche */
+      document.getElementById("search-form").addEventListener("submit", function(e) {
+          let query = document.getElementById("placeholder").value;
+          let data = {
+              event: "search",
+              query: query,
+              visitor_id: getVisitorId(),
+              timestamp: new Date().toISOString()
+          };
+          let blob = new Blob([JSON.stringify(data)], {type: "application/json"});
+          if (navigator.sendBeacon) {
+              navigator.sendBeacon("tracker.php", blob);
+          } else {
+              // Fallback en requête synchrone
+              let xhr = new XMLHttpRequest();
+              xhr.open("POST", "tracker.php", false);
+              xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+              xhr.send(JSON.stringify(data));
+          }
+      });
+
+      checkLangCookie();
+      switchPlaceholder();
+      setInterval(switchPlaceholder, 10000);
+  </script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+{
+    "name": "tga/abarak",
+    "autoload": {
+        "psr-4": {
+            "Tga\\Abarak\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Théo Garin",
+            "email": "git@abarak.com"
+        }
+    ],
+    "require": {
+        "vlucas/phpdotenv": "^5.6",
+        "phpmailer/phpmailer": "^6.9"
+    }
+}

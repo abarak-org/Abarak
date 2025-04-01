@@ -1,0 +1,17 @@
+{
+    "home": [
+        { "element": "subtitle", "text": "La herramienta de búsqueda de hiperproximidad mejorada por IA" },
+        { "element": "slogan", "text": "Encuentra todo, en cualquier momento, al mejor precio" },
+        { "element": "placeholder", "text": ["Entrecot", "Aguacate", "Tarjeta", "Batería"] },
+        { "element": "about", "text": "Acerca de" }
+    ],
+    "about" : [
+        { "element": "title", "text": "ABARAK, el motor de búsqueda del comercio de proximidad" },
+        { "element": "part-user", "text": ["Usuarios de Abarak", "Gracias a la IA de ABARAK, encuentra, cerca de ti, todos los productos al mejor precio con su disponibilidad y las opiniones de los consumidores. Descubre también a los comerciantes de tu barrio, sus servicios y promociones. Una oportunidad para descubrir servicios inesperados. Menos desplazamientos, menos pedidos en Internet, mejores precios: ¡un beneficio para ti y un gesto para el planeta!", "Comerciantes", "Más visibilidad gracias a una comunicación accesible e hipersegmentada (desde 100 €/mes). Nuestro objetivo es destacar a los pequeños comercios locales y su valor añadido. Ofrece promociones exclusivas a través de la presentación de la aplicación por un cliente y tu retorno de inversión será inmediato."] },
+        { "element": "part-contributor", "text": ["« Conviértete en miembro de la comunidad y gana recompensas »", "¿Cómo convertirse en colaborador?", "¡Colaborar es muy sencillo! Toma fotos de los productos con sus precios en las tiendas cercanas, menús de restaurantes o incluso tickets de compra.", "Ve a la página “Contribución” de Abarak, haz clic en el botón, toma una foto y valida para que la imagen sea enviada a nuestra IA. Una vez recibida la imagen, recibirás un mensaje de confirmación directamente.", "Porque queremos agradecer a nuestros colaboradores, cada semana ofrecemos hasta 2 000 € en puntos de recompensa para gastar con nuestros socios.", "Estos puntos se pueden utilizar en los sitios asociados o en nuestro sitio de reventa. Este se actualiza cada semana para ofrecerte siempre nuevos artículos al mejor precio.", "¡Contribuye ahora!"] },
+        { "element": "part-investor", "text": ["Para los inversores", "Un crecimiento con un alto apalancamiento y retornos de inversión en menos de 3 años. Una valoración que aumenta más del 5 % cada mes después del lanzamiento de la aplicación. Para más información, contáctenos.", "¡Contáctenos!"] },
+        { "element": "choice-form", "text": ["Por correo electrónico", "Por cita"] },
+        { "element": "form-mail", "text": ["Nombre", "Apellido", "Correo", "Mensaje", "Validar"] },
+        { "element": "pages", "text": ["Inicio"] }
+    ]
+}

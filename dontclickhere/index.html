@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blue Screen of Death</title>
+    <style>
+        body {
+            background-color: #0000AA;
+            color: white;
+            font-family: "Lucida Console", Monaco, monospace;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .bsod {
+            max-width: 800px;
+            padding: 20px;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 1.2em;
+            line-height: 1.5;
+        }
+        .code {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="bsod">
+        <h1>:(</h1>
+        <p>Votre PC a rencontré un problème et doit redémarrer. Nous collectons simplement des informations d’erreur, puis nous redémarrerons pour vous.</p>
+        <p class="code">0x000000D1 (DRIVER_IRQL_NOT_LESS_OR_EQUAL)</p>
+        <p>Si vous voulez en savoir plus, vous pouvez rechercher cette erreur en ligne plus tard : DRIVER_IRQL_NOT_LESS_OR_EQUAL</p>
+    </div>
+</body>
+</html>

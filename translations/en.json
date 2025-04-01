@@ -1,0 +1,17 @@
+{
+    "home": [
+        { "element": "subtitle", "text": "AI-Enhanced Hyper-Proximity Search Engine" },
+        { "element": "slogan", "text": "Find Anything, Anywhere, on Any Device." },
+        { "element": "placeholder", "text": ["Ribsteak", "Avocado", "Card", "Battery"] },
+        { "element": "about", "text": "About" }
+    ],
+    "about" : [
+        { "element": "title", "text": "ABARAK, the search engine for local shopping" },
+        { "element": "part-user", "text": ["Abarak's Users", "Thanks to Abarak’s AI, you can find, near you, products available at the best prices, with their availability and reviews from other consumers. You can also discover shop owners in your district, as well as their services and promotions. Grab the opportunity to discover unexpected services: fewer trips, fewer online orders, better prices—a benefit for you and a gesture for our planet!", "Shopkeepers", "More visibility through accessible and hyper-focused communication (for 100€/month). Our goal is to showcase small local businesses and their added value. Offer exclusive promotions in exchange for presenting our application to ensure an immediate return on investment."] },
+        { "element": "part-contributor", "text": ["« Become a member of our community and earn rewards »", "How to become contributor?", "Contributing is easy! Take photos of product price tags in shops near you, restaurant menus, or even your cashier receipts.", "Go to Abarak’s “Contribution” page, click on the button, take the photo, and validate it to send the image to our AI. Once correctly received, a message will be sent to confirm its reception.", "Because we want to thank every one of our contributors, we offer 2,000€ worth of gift points every week to use with our partners.", "These points can be used on our partners’ websites or our resale platform. The website is updated every week to offer new products at the best prices.", "Contribute right now !"] },
+        { "element": "part-investor", "text": ["For investors", "High-leverage growth with returns on investment in less than three years. A valuation increasing by more than 5% every month after the app’s launch. For more information, please contact us.", "Contact-us !"] },
+        { "element": "choice-form", "text": ["By mail", "By meeting"] },
+        { "element": "form-mail", "text": ["Lastname", "Firstname", "Mail", "Message", "Submit"] },
+        { "element": "pages", "text": ["Home"] }
+    ]
+}

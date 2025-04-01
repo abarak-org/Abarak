@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="description" content="Hyper-Proximity Search Engine"/>
+<meta name="keywords" content="Abarak, Proximity, Search, Items, User, Contributor, Investor"/>
+<meta name="author" content="Abarak"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>What is ABARAK ?</title>
+
+<link href="abarak_com_styles.css" rel="stylesheet"/></head>
+<body class="about-page" style="height: 100vh;">
+
+<button id="back" class="back" onclick="backChoice()" style="display: none;"><-</button>
+
+<h1 id="title" class="title title-about">
+    ABARAK, le moteur de recherche du commerce de proximité.</span>
+</h1>
+
+<select id="language" class="language" name="language">
+    <option id="en" value="en">En</li>
+    <option id="fr" value="fr">Fr</li>
+  	<option id="es" value="esp">Es</li>
+    <option id="ro" value="ro">Ro</li>
+</select>
+
+<div id="choice" class="choice">
+    <button id="user" class="choice-button" onclick="switchCategory(this)">
+        <img src="img/users.png" alt="Icône utilisateur"/>
+    </button>
+
+    <button id="contributor" class="choice-button" onclick="switchCategory(this)">
+        <img src="img/contributors.png" alt="Icône contributeur"/>
+    </button>
+    
+    <button id="investor" class="choice-button" onclick="switchCategory(this)">
+        <img src="img/investors.png" alt="Pour les investisseurs"/>
+    </button>
+</div>
+
+
+<div id="main">
+
+<div id="part-user" class="part">
+    <h2>Utilisateurs Abarak</h2>
+    <p class="paragraph-category">
+        Grâce à l’IA ABARAK, trouvez, près de chez vous, tous les produits au meilleur prix avec leur disponibilité et des avis de consommateurs. 
+        Découvrez aussi les commerçants de votre quartier, leurs services et promotions. Une opportunité pour découvrir des services insoupçonnés.
+        Moins de déplacements, moins de commandes sur internet, des meilleurs prix : un gain pour vous, un geste pour la planète !
+    </p>
+
+    <h2>Commerçants</h2>
+    <p class="paragraph-category">
+        Plus de visibilité grâce à une communication accessible et hyper ciblée. (dès 100€/mois). 
+        Notre but est de mettre en avant les petits commerces de proximité et leur valeur ajoutée.
+        Proposez des offres exclusives sur présentation de l’appli par un client et votre retour sur investissement sera immédiat.
+    </p>
+    <!-- <img src="abarak_app.png" width="250px" alt="Image application Abarak"/> -->
+</div>
+
+<div id="part-contributor" class="part">
+    <h2>« Devenez membre de la communauté et remportez des cadeaux »</h2>
+    <h2>Comment devenir contributeur ?</h2>
+    <p class="grid">
+        <span class="paragraph-category">
+            Pour contribuer rien de plus simple ! Prenez en photo des produits avec leurs prix dans les magasins en bas de chez vous,
+             des menus de restaurants ou même des tickets de courses.
+        </span>
+
+        <span class="paragraph-category">
+            Rendez-vous sur la page « Contribution » d'Abarak, appuyez sur le bouton, prenez la photo et validez pour que l'image soit envoyée à notre IA. Une fois l'image reçue, un message de confirmation vous sera renvoyé directement.
+        </span>
+    </p>
+
+    <p class="paragraph-category">
+        Parce que nous tenons à remercier nos contributeurs, chaque semaine nous offrons aux meilleurs contributeurs jusqu’à 2000 € de points cadeaux à dépenser chez nos partenaires.
+    </p>
+    <p class="paragraph-category">
+        Ces points sont utilisables sur les sites partenaires ou notre site de revente. 
+        Celui-ci est mis à jour chaque semaine afin de vous proposer toujours de nouveaux articles aux meilleurs prix.
+    </p>
+
+    <a href="https://photo.abarak.com">Contribuer dès maintenant !</a>
+</div>
+
+<div id="part-investor" class="part">
+    <h2>Pour les investisseurs</h2>
+    <p class="paragraph-category">
+        Une croissance à fort effet de levier avec des retours sur investissement en moins de 3 ans. 
+        Une valorisation qui augmente de plus de 5% tous les mois après lancement de l'application.
+        Pour en savoir plus, contactez-nous.
+    </p>
+
+    <button class="contact" id="contact" onclick="showForm()">Contactez-nous ! ↓</button>
+
+    <div id="form" class="contact-div">
+        <div id="choice-form" class="choice-form">
+            <button id="switch-mail" class="actual" disabled>Par mail</button>
+            <button id="switch-calendly">Par rendez-vous</button>
+        </div>
+        <form id="form-mail" class="form-mail active" method="post">
+            <label class="label-form vertical" style="grid-area: firstname;">
+                Prénom
+                <input id="firstname" name="firstname" type="text" required/>
+            </label>
+            <label class="label-form vertical" style="grid-area: lastname;">
+                Nom
+                <input id="lastname" name="lastname" type="text" required/>
+            </label>
+            <label class="label-form vertical" style="grid-area: mail;">
+                Email
+                <input id="mail" name="mail" type="text" required/>
+            </label>
+            <label  class="label-form vertical" style="grid-area: msg;">
+                Message
+                <textarea id="message" name="message" rows="10" required></textarea>
+            </label>
+            <input id="submit" type="submit" value="Valider" style="grid-area: submit;"/>
+            <div id="response"></div>
+        </form>
+        <!-- Début de widget en ligne Calendly -->
+        <div id="form-calendly" class="calendly-inline-widget" data-url="https://calendly.com/planning-contact-abarak/demande-de-rendez-vous-fr" style="min-width:320px;height:700px;"></div>
+        <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+        <!-- Fin de widget en ligne Calendly -->
+    </div>
+</div>
+</div>
+
+<div id="pages" class="pages">
+    <a id="about" href="/">Home</a>
+</div>
+</body>
+
+<script type="text/javascript" src="abarak.js"></script>
+<script>
+    const body = document.getElementsByTagName("body")[0];
+    const title = document.getElementsByClassName("title")[0];
+
+    const choice = document.getElementById("choice");
+    const back = document.getElementById("back");
+    const user = document.getElementById("user");
+    const contributor = document.getElementById("contributor");
+    const investor = document.getElementById("investor");
+
+    const response = document.getElementById("response");
+    const form = document.getElementById("form");
+    const formMail = document.getElementById("form-mail");
+    const formCalendly = document.getElementById("form-calendly");
+    const submit = document.getElementById("submit");
+
+    const btnMail = document.getElementById("switch-mail");
+    const btnCalendly = document.getElementById("switch-calendly");
+
+    addDelayAnimation(title, 100);
+    addDelayAnimation(user, 500);
+    addDelayAnimation(contributor, 1000);
+    addDelayAnimation(investor, 1500);
+
+    form.addEventListener('submit', sendForm);
+
+    function sendForm(event) {
+        event.preventDefault();
+
+        let xhttp = new XMLHttpRequest();
+        let formData = prepareFormData();
+
+        xhttp.onreadystatechange=function() {
+            if(this.readyState == 1) {
+                submit.setAttribute("disabled", "");
+            }
+
+            if (this.readyState == 4 && this.status == 200) {
+                if(this.response=='1') {
+                    response.textContent = "La demande de contact a été envoyée avec succès !";
+                    response.classList.toggle("success");
+                } else {
+                    response.textContent = "Erreur lors de l'envoi de la demande de contact";
+                    response.classList.toggle("error");
+                }
+                submit.removeAttribute("disabled");
+            }
+       }
+        
+        xhttp.open("POST", "https://abarak.com/form_contact.php", true);        
+        xhttp.send(formData);
+    }
+
+    function prepareFormData() {
+        const firstname = document.getElementById("firstname").value;
+        const lastname = document.getElementById("lastname").value;
+        const mail = document.getElementById("mail").value;
+        const message = document.getElementById("message").value;
+
+        let formData = new FormData();
+        formData.append("firstname", firstname);
+        formData.append("lastname", lastname);
+        formData.append("mail", mail);
+        formData.append("message", message);
+
+        return formData;
+    } 
+
+    function backChoice() {
+        let actualPage = document.getElementsByClassName("active");
+
+        if(actualPage[0]==undefined) { return; }
+        actualPage[0].classList.toggle("active");
+
+        choice.style.display="grid";
+        back.style.display="none";
+        body.setAttribute("style", "height: 100vh");
+    }
+
+    function switchCategory(element) {
+        let category = document.getElementById('part-'+element.id);
+        category.style.animation = 'fadeIn 2s forwards';
+        category.classList.toggle("active");
+
+        body.removeAttribute("style");
+        choice.style.display="none";
+        back.style.display="block";
+    }
+
+    btnMail.addEventListener("click", switchForm);
+    btnCalendly.addEventListener("click", switchForm);
+
+    function showForm() { form.classList.toggle("active"); }
+    function switchForm(event) {
+        if(event.target==btnMail) { changeForm(btnMail, btnCalendly, formCalendly, formMail); } 
+        else { changeForm(btnCalendly, btnMail, formMail, formCalendly); }
+    }
+
+    function changeForm(oldBtn, newBtn, oldForm, newForm) {
+        if(!oldForm.className.includes('active') || newForm.className.includes('active')) { return; }
+
+        oldBtn.setAttribute("disabled", "");
+        oldBtn.classList.toggle("actual");
+        oldForm.classList.toggle("active");
+
+        newBtn.removeAttribute("disabled");
+        newBtn.classList.toggle("actual");
+        newForm.classList.toggle("active");
+    }
+
+    function switchCalendlyLang(lang) {
+        if(lang==null || lang==undefined || lang=="") { return; }
+        
+        if(lang=='fr' || lang=='esp') {
+            formCalendly.setAttribute("data-url", "https://calendly.com/planning-contact-abarak/demande-de-rendez-vous-"+lang);
+        } else {
+            formCalendly.setAttribute("data-url", "https://calendly.com/planning-contact-abarak/demande-de-rendez-vous-en");
+        }
+    }
+
+    checkLangCookie();
+</script>

@@ -1,0 +1,24 @@
+# Fichiers sensibles
+.env
+
+# Répertoire des logs et fichiers log
+/logs/
+*.log
+
+# Fichiers temporaires ou de sauvegarde
+*.swp
+*~
+*.bak
+*.tmp
+
+# Fichiers et dossiers spécifiques aux systèmes d'exploitation
+.DS_Store
+Thumbs.db
+
+# Dossiers d'IDE et d'éditeurs de code
+.idea/
+.vscode/
+
+
+/vendor/
+composer.lock

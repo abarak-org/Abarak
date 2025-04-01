@@ -1,0 +1,17 @@
+{
+    "home": [
+        { "element": "subtitle", "text": "Instrumentul de căutare de hiperproximitate îmbunătățit de IA" },
+        { "element": "slogan", "text": "Găsește totul, oricând, la cel mai bun preț" },
+        { "element": "placeholder", "text": ["Antricot", "Avocado", "Card", "Baterie"] },
+        { "element": "about", "text": "Acasă" }
+    ],
+    "about" : [
+        { "element": "title", "text": "ABARAK, motorul de căutare pentru comerțul de proximitate" },
+        { "element": "part-user", "text": ["Utilizatorii Abarak", "Datorită IA-ului ABARAK, găsești, aproape de tine, toate produsele la cel mai bun preț, împreună cu disponibilitatea lor și opiniile consumatorilor. Descoperă, de asemenea, comercianții din cartierul tău, serviciile și promoțiile lor. O oportunitate de a descoperi servicii neașteptate. Mai puține deplasări, mai puține comenzi online, prețuri mai bune: un beneficiu pentru tine și un gest pentru planetă!", "Comercianți", "Mai multă vizibilitate datorită unei comunicări accesibile și hiper-segmentate (de la 100 €/lună). Obiectivul nostru este să evidențiem micile afaceri locale și valoarea lor adăugată. Oferiți promoții exclusive prin prezentarea aplicației de către un client, iar rentabilitatea investiției va fi imediată."] },
+        { "element": "part-contributor", "text": ["« Devino membru al comunității și câștigă recompense »", "Cum să devii colaborator?", "Să contribui este foarte simplu! Fă fotografii ale produselor cu prețurile lor în magazinele din apropierea ta, meniuri de restaurante sau chiar bonuri de casă.", "Accesează pagina “Contribuție” a Abarak, apasă pe buton, fă o fotografie și validează pentru ca imaginea să fie trimisă către IA-ul nostru. Odată ce imaginea este primită, vei primi un mesaj de confirmare direct.", "Pentru a le mulțumi colaboratorilor noștri, oferim săptămânal până la 2 000 € în puncte cadou care pot fi utilizate la partenerii noștri.", "Aceste puncte pot fi utilizate pe site-urile partenere sau pe site-ul nostru de revânzare. Acesta este actualizat săptămânal pentru a vă oferi mereu articole noi la cele mai bune prețuri.", "Contribuie acum!"] },
+        { "element": "part-investor", "text": ["Pentru investitori", "O creștere cu un efect de levier ridicat și un randament al investițiilor în mai puțin de 3 ani. O evaluare care crește cu peste 5 % în fiecare lună după lansarea aplicației. Pentru mai multe informații, contactați-ne.", "Contactați-ne!"] },
+        { "element": "choice-form", "text": ["Prin e-mail", "Prin programare"] },
+        { "element": "form-mail", "text": ["Prenume", "Nume", "E-mail", "Mesaj", "Validare"] },
+        { "element": "pages", "text": ["Despre"] }
+    ]
+}
