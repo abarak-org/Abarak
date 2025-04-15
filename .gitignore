@@ -22,3 +22,5 @@ Thumbs.db
 
 /vendor/
 composer.lock
+
+old/
