@@ -1,7 +1,6 @@
 /***************************************/
 /* Gestion des cookies et de la langue */
 /***************************************/
-
 async function switchLanguage(lang) {
     let translationFile = lang + ".json";
     var page = document.URL.split('/').pop();
@@ -107,7 +106,6 @@ function checkLangCookie() {
 }
 
 /* Fonctions animations */
-
 function addDelayAnimation(element, time) {
     if (element == null || time == null || element.style == '' || time < 0) { return; }
     setTimeout(() => {
@@ -116,8 +114,6 @@ function addDelayAnimation(element, time) {
 }
 
 /* Fonctions de Tracking */
-
-// Récupère ou crée un identifiant unique pour le visiteur (via cookie)
 function getVisitorId() {
     let visitor = getCookie("visitor_id");
     if (visitor == "") {
@@ -127,15 +123,8 @@ function getVisitorId() {
     return visitor;
 }
 
-// Envoi d'un événement de tracking au serveur
-document.getElementById("search-form").addEventListener("submit", function (e) {
-    let query = document.getElementById("search-input").value;
-    let data = {
-        event: "search",
-        query: query,
-        visitor_id: getVisitorId(),
-        timestamp: new Date().toISOString()
-    };
+function sendTrackingEvent(event, extra) {
+    let data = Object.assign({ event, visitor_id: getVisitorId(), timestamp: new Date().toISOString() }, extra);
     let blob = new Blob([JSON.stringify(data)], { type: "application/json" });
     if (navigator.sendBeacon) {
         navigator.sendBeacon("tracker.php", blob);
@@ -145,15 +134,11 @@ document.getElementById("search-form").addEventListener("submit", function (e) {
         xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
         xhr.send(JSON.stringify(data));
     }
-});
-
-function switchPlaceholder(text) {
-    const input = document.getElementById('search-input');
-    if (!input) return;
-    input.placeholder = text || "Search...";
 }
 
+/* === Tout le code dépendant du DOM === */
 document.addEventListener('DOMContentLoaded', function () {
+    /* Géolocalisation et display */
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(async function (position) {
             const lat = position.coords.latitude;
@@ -163,7 +148,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 const data = await resp.json();
                 const city = data.address.city || data.address.town || data.address.village;
                 if (city) {
-                    // Affichage de la ville détectée
                     const locDiv = document.createElement('div');
                     locDiv.id = 'user-location';
                     locDiv.textContent = `Localisation : ${city}`;
@@ -177,6 +161,8 @@ document.addEventListener('DOMContentLoaded', function () {
             console.warn('Geolocation error:', error);
         });
     }
+
+    /* Recherche & suggestions */
     const engineButtons = document.querySelectorAll('.engine-button');
     const searchForm = document.getElementById('search-form');
     const searchInput = document.getElementById('search-input');
@@ -223,7 +209,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 .then(data => updateSuggestions(data[1]))
                 .catch(console.error);
         } else {
-            // Filtrer et préfixer par la ville si connue
             const filtered = abarakStatic.filter(item =>
                 item.toLowerCase().startsWith(query.toLowerCase())
             );
@@ -242,27 +227,27 @@ document.addEventListener('DOMContentLoaded', function () {
             suggestionsList.appendChild(opt);
         });
     }
-});
 
-const citySelect = document.getElementById('city-select');
-const termSelect = document.getElementById('term-select');
-const loadBtn = document.getElementById('load-scenario');
+    const citySelect = document.getElementById('city-select');
+    const termSelect = document.getElementById('term-select');
+    const loadBtn = document.getElementById('load-scenario');
 
-loadBtn.addEventListener('click', () => {
-    const city = citySelect.value;
-    const term = termSelect.value;
-    if (!city || !term) {
-        alert('Veuillez choisir une ville et un terme.');
-        return;
-    }
-    // Basculer automatiquement sur Abarak
-    document.querySelectorAll('.engine-button').forEach(b => {
-        b.classList.toggle('active', b.dataset.engine === 'abarak');
+    loadBtn.addEventListener('click', () => {
+        const city = citySelect.value;
+        const term = termSelect.value;
+        if (!city || !term) {
+            alert('Veuillez choisir une ville et un terme.');
+            return;
+        }
+        // Basculer automatiquement sur Abarak
+        engineButtons.forEach(b => {
+            b.classList.toggle('active', b.dataset.engine === 'abarak');
+        });
+        selectedEngine = 'abarak';
+        searchForm.action = '/search';
+
+        // Pré-remplir et déclencher suggestions
+        searchInput.value = `${city} ${term}`;
+        searchInput.dispatchEvent(new Event('input'));
     });
-    selectedEngine = 'abarak';
-    searchForm.action = '/search';
-
-    // Pré-remplir et déclencher suggestions
-    searchInput.value = `${city} ${term}`;
-    searchInput.dispatchEvent(new Event('input'));
 });
