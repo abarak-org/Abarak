@@ -110,7 +110,6 @@ function checkLangCookie() {
 
 function addDelayAnimation(element, time) {
     if (element == null || time == null || element.style == '' || time < 0) { return; }
-
     setTimeout(() => {
         element.style.animation = 'fadeIn 2s forwards';
     }, time);
@@ -129,26 +128,91 @@ function getVisitorId() {
 }
 
 // Envoi d'un événement de tracking au serveur
-function sendTrackingEvent(eventName, eventData) {
+document.getElementById("search-form").addEventListener("submit", function(e) {
+    let query = document.getElementById("search-input").value;
     let data = {
-        event: eventName,
+        event: "search",
+        query: query,
         visitor_id: getVisitorId(),
-        ...eventData,
         timestamp: new Date().toISOString()
     };
-
-    let xhr = new XMLHttpRequest();
-    xhr.open("POST", "tracker.php", true);
-    xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-    xhr.send(JSON.stringify(data));
-}
+    let blob = new Blob([JSON.stringify(data)], {type: "application/json"});
+    if (navigator.sendBeacon) {
+        navigator.sendBeacon("tracker.php", blob);
+    } else {
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST", "tracker.php", false);
+        xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        xhr.send(JSON.stringify(data));
+    }
+});
 
 function switchPlaceholder(text) {
-    const input = document.getElementById('placeholder');
+    const input = document.getElementById('search-input');
     if (!input) return;
-    if (text) {
-        input.placeholder = text;
-    } else {
-        input.placeholder = "Search...";
-    }
+    input.placeholder = text || "Search...";
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    const engineButtons = document.querySelectorAll('.engine-button');
+    const searchForm = document.getElementById('search-form');
+    const searchInput = document.getElementById('search-input');
+    const suggestionsList = document.getElementById('suggestions');
+    let selectedEngine = 'google';
+  
+    engineButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        engineButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        selectedEngine = btn.getAttribute('data-engine');
+        if (selectedEngine === 'google') {
+          searchForm.action = 'https://www.google.com/search';
+        } else {
+          searchForm.action = '/search'; // endpoint de démo Abarak
+        }
+        suggestionsList.innerHTML = '';
+      });
+    });
+  
+    const abarakStatic = [
+      'Batterie de voiture',
+      'Batterie de téléphone',
+      'Batterie d’ordinateur',
+      'Autres batteries',
+      'Batterie (instrument de musique)',
+      'Batterie (de cuisine)',
+      'Carte à jouer',
+      'Carte routière',
+      'Carte à puce',
+      'Autres cartes',
+      'Carte postale',
+      'Carte bristol',
+      'Entrecôte'
+    ];
+  
+    searchInput.addEventListener('input', function() {
+      const query = this.value.trim();
+      if (!query) {
+        suggestionsList.innerHTML = '';
+        return;
+      }
+      if (selectedEngine === 'google') {
+        fetch('https://suggestqueries.google.com/complete/search?client=firefox&q=' + encodeURIComponent(query))
+          .then(r => r.json())
+          .then(data => updateSuggestions(data[1]))
+          .catch(console.error);
+      } else {
+        const filtered = abarakStatic.filter(item => item.toLowerCase().startsWith(query.toLowerCase()));
+        updateSuggestions(filtered);
+      }
+    });
+  
+    function updateSuggestions(items) {
+      suggestionsList.innerHTML = '';
+      items.slice(0, 5).forEach(text => {
+        const opt = document.createElement('option');
+        opt.value = text;
+        suggestionsList.appendChild(opt);
+      });
+    }
+  });

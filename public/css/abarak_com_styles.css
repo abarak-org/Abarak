@@ -215,6 +215,27 @@ button, input[type=submit] {
     background-color: #e8e8e8;
 }
 
+/* Nouveau style pour le sélecteur de moteur */
+.engine-selector {
+    display: flex;
+    justify-content: center;
+    margin: 1em 0;
+}
+.engine-button {
+    background-color: transparent;
+    border: 1px solid #0073b6;
+    border-radius: 4px;
+    padding: 0.5em 1em;
+    margin: 0 0.5em;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.2s, color 0.2s;
+}
+.engine-button.active {
+    background-color: #0073b6;
+    color: #ffffff;
+}
+
 /*****************/
 /* Page A propos */
 /*****************/

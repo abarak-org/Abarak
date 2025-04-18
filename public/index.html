@@ -54,7 +54,7 @@ example :
   <meta name="author" content="Abarak"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>ABARAK Find Anything, Anywhere, on Any Device</title>
-  <link href="abarak_com_styles.css" rel="stylesheet"/>
+  <link href="public/css/abarak_com_styles.css" rel="stylesheet"/>
 </head>
 <body class="front-page">
   <select id="language" class="language" name="language">
@@ -63,6 +63,7 @@ example :
       <option id="esp" value="esp">Es</option>
       <option id="ro" value="ro">Ro</option>
   </select>
+  
   <div class="container">
       <div class="logo-container">
           <div class="letter-u" id="u1">U</div>
@@ -76,25 +77,31 @@ example :
   </div>
   <p class="slogan" id="slogan">Find Anything, Anywhere, on Any Device.</p>
 
+  <!-- Nouveau sélecteur de moteur -->
+  <div id="engine-selector" class="engine-selector">
+    <button type="button" data-engine="google" class="engine-button active">Google</button>
+    <button type="button" data-engine="abarak" class="engine-button">Abarak</button>
+  </div>
+
   <div class="search-container">
-      <div class="search-input-container"> <!-- Barre de recherche -->
-          <img src="img/search.png" class="search-icon"/> <!-- Icône de recherche -->
-          <!-- Ajout de l'ID "search-form" pour pouvoir capter la soumission -->
+      <div class="search-input-container">
+          <img src="public/img/search.png" class="search-icon"/>
           <form id="search-form" action="https://www.google.com/search" method="get" style="display: flex; width: 100%;">
-              <input id="placeholder" type="text" name="q" class="search-box" placeholder="">
-              <img class="search-icon" src="img/micro.png" width="24px"/>
-              <img src="img/camera.png" width="24px"/>
+              <input id="search-input" list="suggestions" type="text" name="q" class="search-box" placeholder="">
+              <datalist id="suggestions"></datalist>
+              <img class="search-icon" src="public/img/micro.png" width="24px"/>
+              <img src="public/img/camera.png" width="24px"/>
           </form>
       </div>
-      <!-- <button type="submit" class="search-button">Rechercher</button> -->
   </div>
+
   <div id="pages" class="pages">
       <a id="about" href="/about">About</a>
   </div>
   
   <div id="version" style="position: fixed; bottom: 5px; left: 5px; font-size: 0.8em; color: gray;"></div>
 
-  <script type="text/javascript" src="abarak.js"></script>
+  <script type="text/javascript" src="public/js/abarak.js"></script>
   <script>
       const u1 = document.getElementById('u1');
       const u2 = document.getElementById('u2');
