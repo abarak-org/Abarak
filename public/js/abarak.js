@@ -128,7 +128,7 @@ function getVisitorId() {
 }
 
 // Envoi d'un événement de tracking au serveur
-document.getElementById("search-form").addEventListener("submit", function(e) {
+document.getElementById("search-form").addEventListener("submit", function (e) {
     let query = document.getElementById("search-input").value;
     let data = {
         event: "search",
@@ -136,7 +136,7 @@ document.getElementById("search-form").addEventListener("submit", function(e) {
         visitor_id: getVisitorId(),
         timestamp: new Date().toISOString()
     };
-    let blob = new Blob([JSON.stringify(data)], {type: "application/json"});
+    let blob = new Blob([JSON.stringify(data)], { type: "application/json" });
     if (navigator.sendBeacon) {
         navigator.sendBeacon("tracker.php", blob);
     } else {
@@ -153,66 +153,93 @@ function switchPlaceholder(text) {
     input.placeholder = text || "Search...";
 }
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(async function (position) {
+            const lat = position.coords.latitude;
+            const lon = position.coords.longitude;
+            try {
+                const resp = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`);
+                const data = await resp.json();
+                const city = data.address.city || data.address.town || data.address.village;
+                if (city) {
+                    // Affichage de la ville détectée
+                    const locDiv = document.createElement('div');
+                    locDiv.id = 'user-location';
+                    locDiv.textContent = `Localisation : ${city}`;
+                    document.body.prepend(locDiv);
+                    window.userCity = city;
+                }
+            } catch (e) {
+                console.error('Reverse geocoding error:', e);
+            }
+        }, function (error) {
+            console.warn('Geolocation error:', error);
+        });
+    }
     const engineButtons = document.querySelectorAll('.engine-button');
     const searchForm = document.getElementById('search-form');
     const searchInput = document.getElementById('search-input');
     const suggestionsList = document.getElementById('suggestions');
     let selectedEngine = 'google';
-  
+
     engineButtons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        engineButtons.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        selectedEngine = btn.getAttribute('data-engine');
-        if (selectedEngine === 'google') {
-          searchForm.action = 'https://www.google.com/search';
-        } else {
-          searchForm.action = '/search'; // endpoint de démo Abarak
-        }
-        suggestionsList.innerHTML = '';
-      });
+        btn.addEventListener('click', () => {
+            engineButtons.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            selectedEngine = btn.getAttribute('data-engine');
+            searchForm.action = (selectedEngine === 'google')
+                ? 'https://www.google.com/search'
+                : '/search';
+            suggestionsList.innerHTML = '';
+        });
     });
-  
+
     const abarakStatic = [
-      'Batterie de voiture',
-      'Batterie de téléphone',
-      'Batterie d’ordinateur',
-      'Autres batteries',
-      'Batterie (instrument de musique)',
-      'Batterie (de cuisine)',
-      'Carte à jouer',
-      'Carte routière',
-      'Carte à puce',
-      'Autres cartes',
-      'Carte postale',
-      'Carte bristol',
-      'Entrecôte'
+        'Batterie de voiture',
+        'Batterie de téléphone',
+        'Batterie d’ordinateur',
+        'Autres batteries',
+        'Batterie (instrument de musique)',
+        'Batterie (de cuisine)',
+        'Carte à jouer',
+        'Carte routière',
+        'Carte à puce',
+        'Autres cartes',
+        'Carte postale',
+        'Carte bristol',
+        'Entrecôte'
     ];
-  
-    searchInput.addEventListener('input', function() {
-      const query = this.value.trim();
-      if (!query) {
-        suggestionsList.innerHTML = '';
-        return;
-      }
-      if (selectedEngine === 'google') {
-        fetch('https://suggestqueries.google.com/complete/search?client=firefox&q=' + encodeURIComponent(query))
-          .then(r => r.json())
-          .then(data => updateSuggestions(data[1]))
-          .catch(console.error);
-      } else {
-        const filtered = abarakStatic.filter(item => item.toLowerCase().startsWith(query.toLowerCase()));
-        updateSuggestions(filtered);
-      }
+
+    searchInput.addEventListener('input', function () {
+        const query = this.value.trim();
+        if (!query) {
+            suggestionsList.innerHTML = '';
+            return;
+        }
+        if (selectedEngine === 'google') {
+            fetch('https://suggestqueries.google.com/complete/search?client=firefox&q=' + encodeURIComponent(query))
+                .then(r => r.json())
+                .then(data => updateSuggestions(data[1]))
+                .catch(console.error);
+        } else {
+            // Filtrer et préfixer par la ville si connue
+            const filtered = abarakStatic.filter(item =>
+                item.toLowerCase().startsWith(query.toLowerCase())
+            );
+            const itemsWithCity = window.userCity
+                ? filtered.map(item => `${window.userCity} ${item}`)
+                : filtered;
+            updateSuggestions(itemsWithCity);
+        }
     });
-  
+
     function updateSuggestions(items) {
-      suggestionsList.innerHTML = '';
-      items.slice(0, 5).forEach(text => {
-        const opt = document.createElement('option');
-        opt.value = text;
-        suggestionsList.appendChild(opt);
-      });
+        suggestionsList.innerHTML = '';
+        items.slice(0, 5).forEach(text => {
+            const opt = document.createElement('option');
+            opt.value = text;
+            suggestionsList.appendChild(opt);
+        });
     }
-  });
+});
