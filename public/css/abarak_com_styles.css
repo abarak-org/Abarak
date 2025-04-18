@@ -248,6 +248,26 @@ button, input[type=submit] {
     z-index: 1000;
 }
 
+/* Sélecteur de scénarios */
+.scenario-selector {
+    display: flex;
+    justify-content: center;
+    gap: 0.5em;
+    margin-bottom: 1em;
+}
+.scenario-selector select,
+.scenario-selector button {
+    padding: 0.5em;
+    border-radius: 4px;
+    border: 1px solid #0073b6;
+    background: white;
+    cursor: pointer;
+}
+.scenario-selector button:hover {
+    background: #0073b6;
+    color: white;
+}
+
 /*****************/
 /* Page A propos */
 /*****************/

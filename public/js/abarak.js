@@ -243,3 +243,26 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 });
+
+const citySelect = document.getElementById('city-select');
+const termSelect = document.getElementById('term-select');
+const loadBtn = document.getElementById('load-scenario');
+
+loadBtn.addEventListener('click', () => {
+    const city = citySelect.value;
+    const term = termSelect.value;
+    if (!city || !term) {
+        alert('Veuillez choisir une ville et un terme.');
+        return;
+    }
+    // Basculer automatiquement sur Abarak
+    document.querySelectorAll('.engine-button').forEach(b => {
+        b.classList.toggle('active', b.dataset.engine === 'abarak');
+    });
+    selectedEngine = 'abarak';
+    searchForm.action = '/search';
+
+    // Pré-remplir et déclencher suggestions
+    searchInput.value = `${city} ${term}`;
+    searchInput.dispatchEvent(new Event('input'));
+});
